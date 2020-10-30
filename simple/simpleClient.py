@@ -1,19 +1,35 @@
 from opcua import Client
 import time
 
-url = "opc.tcp://10.42.0.104:4840" #IP:port
-
-client = Client(url)
-client.connect()
-print("Client connected")
-
-while True:
-    temp = client.get_node("ns=2; i=2")
-    Temperature = temp.get_value()
-    print(Temperature)
+def start_client():
     
-    timeS = client.get_node("ns=2; i=3")
-    timeStamp = timeS.get_value()
-    print(timeStamp)
+   #url = "opc.tcp://172.16.102.43:4840" #IP:port 
+    url = "opc.tcp://192.168.0.100:4840" #IP:port
+    client = Client(url)
     
-    time.sleep(1)
+    try:
+        client.connect()
+        print("Client connected")
+        
+        temp = client.get_node("ns=2; i=2")
+        timeS = client.get_node("ns=2; i=3")
+        
+        cont = 0
+        while cont<20:
+            Temperature = temp.get_value()
+            print(Temperature)
+    
+            timeStamp = timeS.get_value()
+            print(timeStamp)
+            
+            time.sleep(2)
+            cont += 1
+        
+        print("Disconecting")
+        client.disconnect()
+    
+    except:
+        print("Error connecting")
+        
+if __name__ == "__main__":
+    start_client()
