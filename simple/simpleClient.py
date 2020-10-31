@@ -29,7 +29,7 @@ def start_client():
         client.disconnect()
     
     except:
-        print("Error connecting")
+        print("Something went wrong")
         
 if __name__ == "__main__":
     start_client()
