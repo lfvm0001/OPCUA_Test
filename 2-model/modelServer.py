@@ -12,7 +12,6 @@ def start_server():
     name = "OPCUA_SERVER_TEST"
     addspace = server.register_namespace(name)
     
-    node = server.get_objects_node()
     server.import_xml('data_model.xml')
     
     server.start()
@@ -22,8 +21,10 @@ def start_server():
         while True:
             time.sleep(1)    
 
-    finally:
+    except KeyboardInterrupt:
+        print("\nDisconnecting")
         server.stop()
+        exit()
 
 if __name__ == "__main__":
     start_server()
