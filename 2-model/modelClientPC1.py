@@ -1,4 +1,5 @@
 from opcua import Client
+import datetime
 import time
 
 def start_client():
@@ -12,23 +13,22 @@ def start_client():
         print("Client connected")
         
         root = client.get_root_node()  
-        ledID = root.get_child(["0:Objects", "3:Pi", "3:led"])
+        tempID = root.get_child(["0:Objects", "3:PC1", "3:temp"])
+        timeID = root.get_child(["0:Objects", "3:PC1", "3:timeStamp"])
         
-        led = client.get_node(ledID)
+        tempS = client.get_node(tempID)
+        timeS = client.get_node(timeID)
           
-        cnt = 0
-        ledStatus = true
+        temperature = 20
         
-        while cnt<10:
+        while temperature<30:
         
-            led.set_value(ledStatus)
-            cnt += 1
+            TIME = datetime.datetime.now()
             
-            if ledStatus == true:
-                ledStatus = false
-            else:
-                ledStatus = true
-                
+            tempS.set_value(temperature)
+            timeS.set_value(TIME)
+        
+            temperature += 1
             time.sleep(2)
 
         print("Disconecting")

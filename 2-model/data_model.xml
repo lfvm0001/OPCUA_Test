@@ -11,8 +11,8 @@
     <Alias Alias="HasComponent">i=47</Alias>
     <Alias Alias="UtcTime">i=294</Alias>
   </Aliases>
-  <UAObject BrowseName="1:PC" NodeId="ns=1;i=2002" ParentNodeId="i=85">
-    <DisplayName>PC</DisplayName>
+  <UAObject BrowseName="1:PC1" NodeId="ns=1;i=2002" ParentNodeId="i=85">
+    <DisplayName>PC1</DisplayName>
     <References>
       <Reference IsForward="false" ReferenceType="Organizes">i=85</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
@@ -20,8 +20,8 @@
       <Reference ReferenceType="HasComponent">ns=1;i=2006</Reference>
     </References>
   </UAObject>
-  <UAObject BrowseName="1:Pi" NodeId="ns=1;i=2003" ParentNodeId="i=85">
-    <DisplayName>Pi</DisplayName>
+  <UAObject BrowseName="1:PC2" NodeId="ns=1;i=2003" ParentNodeId="i=85">
+    <DisplayName>PC2</DisplayName>
     <References>
       <Reference IsForward="false" ReferenceType="Organizes">i=85</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
