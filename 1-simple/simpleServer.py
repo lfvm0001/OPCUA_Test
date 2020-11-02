@@ -6,7 +6,7 @@ def start_server():
 
     server = Server()
 
-   #url = "opc.tcp://172.16.102.43:4840" #IP:port 
+    #url = "opc.tcp://172.16.102.43:4840" #IP:port 
     url = "opc.tcp://192.168.0.100:4840" #IP:port
     server.set_endpoint(url)
 
@@ -35,10 +35,12 @@ def start_server():
             temp.set_value(Temperature)
             timeS.set_value(TIME)
             
-            print(Temperature,TIME)       
-
-    finally:
+            print(Temperature,TIME)   
+    
+    except KeyboardInterrupt:
+        print("\nDisconnecting")
         server.stop()
+        exit()
 
 if __name__ == "__main__":
     start_server()

@@ -24,12 +24,20 @@ def start_client():
             
             time.sleep(2)
             cont += 1
-        
-        print("Disconecting")
+            
+        print("\nDisconecting")
         client.disconnect()
+            
+    except KeyboardInterrupt:
+        print("\nDisconnecting")
+        client.disconnect()
+        exit()
     
-    except:
-        print("Something went wrong")
+    except Exception:
+        print("\nCant connect to server, try again")
+        exit()
+    
+
         
 if __name__ == "__main__":
     start_client()
