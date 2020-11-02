@@ -1,2 +1,3 @@
 ./4-security/key.pem
 ./4-security/certificate.pem
+./4-security/*.pem
