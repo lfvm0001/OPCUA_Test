@@ -12,18 +12,23 @@ def start_client():
         print("Client connected")
         
         root = client.get_root_node()  
-        tempID = root.get_child(["0:Objects", "3:Pi1", "3:temp"])
-        ledID = root.get_child(["0:Objects", "3:Pi1", "3:led"])
+        ledID = root.get_child(["0:Objects", "3:Pi", "3:led"])
         
-        temp = client.get_node(tempID)
         led = client.get_node(ledID)
           
-        temperature = 25
+        cnt = 0
+        ledStatus = true
         
-        while temperature<30:
+        while cnt<10:
         
-            temp.set_value(temperature)
-            temperature += 1
+            led.set_value(ledStatus)
+            cnt += 1
+            
+            if ledStatus == true:
+                ledStatus = false
+            else:
+                ledStatus = true
+                
             time.sleep(2)
 
         print("Disconecting")

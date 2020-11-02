@@ -13,18 +13,22 @@ def start_client():
         print("Client connected")
         
         root = client.get_root_node()  
-        timeID = root.get_child(["0:Objects", "3:Ordenador1", "3:time"])
+        tempID = root.get_child(["0:Objects", "3:PC", "3:temp"])
+        timeID = root.get_child(["0:Objects", "3:PC", "3:timeStamp"])
         
+        tempS = client.get_node(tempID)
         timeS = client.get_node(timeID)
-
           
-        cont = 0
+        temperature = 20
         
-        while cont<20:
+        while temperature<30:
+        
             TIME = datetime.datetime.now()
+            
+            tempS.set_value(temperature)
             timeS.set_value(TIME)
         
-            cont += 1
+            temperature += 1
             time.sleep(2)
 
         print("Disconecting")
