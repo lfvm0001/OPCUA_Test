@@ -9,9 +9,6 @@ def start_server():
    #url = "opc.tcp://172.16.102.43:4840" #IP:port 
     url = "opc.tcp://192.168.0.100:4840" #IP:port
     server.set_endpoint(url)
-
-    name = "OPCUA_SERVER_TEST"
-    addspace = server.register_namespace(name)
     
     server.import_xml('model_led.xml')
     
