@@ -7,7 +7,7 @@ To generate certificate and key (Taken from https://github.com/AndreasHeine/Secu
 In server:\
    change ssl.conf (subjectAltname, country, organizationName, ...)\
    openssl genrsa -out key.pem 2048 \
-   openssl req -x509 -days 365 -new -out certificate.pem -key key.pem -config ssl.conf\
+   openssl req -x509 -days 36500 -new -out certificate.pem -key key.pem -config ssl.conf\
 \
 Copy certificate.pem and key.pem in client
 
