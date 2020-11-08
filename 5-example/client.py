@@ -1,11 +1,10 @@
+from readXML import read_file
 from opcua import Client
 import RPi.GPIO as GPIO 
 import Adafruit_ADS1x15
-import datetime
 import os.path
 import time
 import sys
-import re
 
 
 def start_client(file):  
@@ -20,71 +19,27 @@ def start_client(file):
 
     client = Client(url)
     
-    #Si se desea seguridad a la hora de conectarse, cargar el certificado y la key 
+    #Si se desea seguridad a la hora de conectarse, cargar el certificado y key 
     #Deben estar en el mismo directorio 
     if not (os.path.isfile('certificate.pem') and os.path.isfile('key.pem')):
         print("No certificate or key found")
         print("Cant connect to server, try again")
         exit()
-        
-    client.set_security_string("Basic256Sha256,SignAndEncrypt,certificate.pem,key.pem")
 
-    try:
+    try:       
+        client.set_security_string("Basic256Sha256,SignAndEncrypt,certificate.pem,key.pem")
         client.connect()
         print("Client connected")
         
         #Leer archivo para determinar los espacios con sus respectivos objetos y variables
-        nameSpaces = []
-        objects    = []
-        variables  = []
-        
-        searchfile = open(file, "r")
-        for line in searchfile:
-            if "<Uri>" in line: 
-                nameS = re.sub('</Uri>|<Uri>','',line)
-                nameS = nameS.strip()
-
-                nsIndex = client.get_namespace_index(nameS)
-                dict_nameS = {"name": nameS, "index": nsIndex}
-                nameSpaces.append(dict_nameS)
-                
-            if "<UAObject" in line:
-                obj = re.sub('.*BrowseName="|".*','',line)
-                obj = obj.strip()
-                obj = re.split(":",obj)
-                
-                id = re.sub('.*NodeId="ns=\d;i=*|".*','',line)
-                id = id.strip()
-                
-                dict_objs = {"i":int(obj[0])-1, "name":obj[1], "id":id}
-                objects.append(dict_objs)
-                
-            if "<UAVariable" in line:
-                var = re.sub('.*BrowseName="|".*','',line)
-                var = var.strip()
-                var = re.split(":",var)
-                
-                id = re.sub('.* NodeId="ns=\d;i=*|".*','',line)
-                id = id.strip()
-                
-                parentid = re.sub('.*ParentNodeId="ns=\d;i=*|".*','',line)
-                parentid = parentid.strip()
-                
-                dict_vars = {"i":int(var[0])-1, "name":var[1], "id":id, "parentid":parentid}
-                variables.append(dict_vars)
+        response = read_file(client, file)
+        nameSpaces = response[0]
+        objects    = response[1]
+        variables  = response[2]
          
-        searchfile.close()
+        #Aca van las acciones del cliente
+        while True:            
         
-        for dicO in objects:
-            dicO["ns"] = nameSpaces[dicO["i"]]["index"]
-            for dicVar in variables:
-                dicVar["ns"] = nameSpaces[dicVar["i"]]["index"]
-                if dicVar["parentid"] == dicO["id"]:
-                    dicVar["parentName"] = dicO["name"]
-           
-           
-        while True:
-            
             #Recorrer los arreglos para imprimir las variables
             print("*****************************************")           
             for dicNs in nameSpaces:
@@ -160,11 +115,3 @@ if __name__ == "__main__":
         
     else:
         print("ERROR: 1 file name is required")
-
-    
-
-
-   
-
-   
-

@@ -1,9 +1,9 @@
 from opcua import Server, ua
+from readXML import read_file
 import datetime
 import os.path
 import time
 import sys
-import re
 
 def start_server(file):  
 
@@ -17,7 +17,7 @@ def start_server(file):
     server.set_endpoint(url)
     server.import_xml(file)
  
-    #Si se desea seguridad a la hora de conectarse, cargar el certificado y la key 
+    #Si se desea seguridad a la hora de conectarse, cargar el certificado y key 
     #Deben estar en el mismo directorio y el cliente tambien debe tenerlos
     server.load_certificate("certificate.pem")
     server.load_private_key("key.pem")
@@ -30,55 +30,12 @@ def start_server(file):
     try:
     
         #Leer archivo para determinar los espacios con sus respectivos objetos y variables
-        nameSpaces = []
-        objects    = []
-        variables  = []
-        
-        searchfile = open(file, "r")
-        for line in searchfile:
-            if "<Uri>" in line: 
-                nameS = re.sub('</Uri>|<Uri>','',line)
-                nameS = nameS.strip()
+        response = read_file(server, file)
+        nameSpaces = response[0]
+        objects    = response[1]
+        variables  = response[2]
 
-                nsIndex = server.get_namespace_index(nameS)
-                dict_nameS = {"name": nameS, "index": nsIndex}
-                nameSpaces.append(dict_nameS)
-                
-            if "<UAObject" in line:
-                obj = re.sub('.*BrowseName="|".*','',line)
-                obj = obj.strip()
-                obj = re.split(":",obj)
-                
-                id = re.sub('.*NodeId="ns=\d;i=*|".*','',line)
-                id = id.strip()
-                
-                dict_objs = {"i":int(obj[0])-1, "name":obj[1], "id":id}
-                objects.append(dict_objs)
-                
-            if "<UAVariable" in line:
-                var = re.sub('.*BrowseName="|".*','',line)
-                var = var.strip()
-                var = re.split(":",var)
-                
-                id = re.sub('.* NodeId="ns=\d;i=*|".*','',line)
-                id = id.strip()
-                
-                parentid = re.sub('.*ParentNodeId="ns=\d;i=*|".*','',line)
-                parentid = parentid.strip()
-                
-                dict_vars = {"i":int(var[0])-1, "name":var[1], "id":id, "parentid":parentid}
-                variables.append(dict_vars)
-         
-        searchfile.close()
-        
-        for dicO in objects:
-            dicO["ns"] = nameSpaces[dicO["i"]]["index"]
-            for dicVar in variables:
-                dicVar["ns"] = nameSpaces[dicVar["i"]]["index"]
-                if dicVar["parentid"] == dicO["id"]:
-                    dicVar["parentName"] = dicO["name"]
-           
-           
+        #Aca van las acciones del servidor
         while True:
             
             #Recorrer los arreglos para imprimir las variables
@@ -94,8 +51,8 @@ def start_server(file):
                             
                             #Escribir el valor de una de las variables
                             if dicVar["name"] == "timeStamp" and dicVar["parentName"] == "Other":
-                                TIME = datetime.datetime.now()
                                 node = server.get_node("ns=" + str(dicVar["ns"]) + "; i=" + str(dicVar["id"]))
+                                TIME = datetime.datetime.now()
                                 node.set_value(TIME)
                                 
                             #Observar el valor de cada una de las variables 
