@@ -1,3 +1,4 @@
 4-security/*.pem
 5-example/*.pem
 5-example/__py*
+5-example/readXML.pyc

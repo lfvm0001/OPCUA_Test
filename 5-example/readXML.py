@@ -49,10 +49,5 @@ def read_file(server,file):
             dicVar["ns"] = nameSpaces[dicVar["i"]]["index"]
             if dicVar["parentid"] == dicO["id"]:
                 dicVar["parentName"] = dicO["name"]
-                
-    response = []
-    response.append(nameSpaces)
-    response.append(objects)
-    response.append(variables)
-    
-    return response
+
+    return nameSpaces, objects, variables
