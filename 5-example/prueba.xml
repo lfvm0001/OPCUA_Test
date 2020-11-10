@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UANodeSet xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NamespaceUris>
+    <Uri>test_ns1</Uri>
+    <Uri>test_ns2</Uri>
+    <Uri>test_ns3</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+  </Aliases>
+  <UAObject BrowseName="1:Obj1ns1" NodeId="ns=1;i=2001" ParentNodeId="i=85">
+    <DisplayName>Obj1ns1</DisplayName>
+    <References>
+      <Reference IsForward="false" ReferenceType="Organizes">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=2003</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=2004</Reference>
+    </References>
+  </UAObject>
+  <UAObject BrowseName="1:Obj2ns1" NodeId="ns=1;i=2002" ParentNodeId="i=85">
+    <DisplayName>Obj2ns1</DisplayName>
+    <References>
+      <Reference IsForward="false" ReferenceType="Organizes">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=2005</Reference>
+    </References>
+  </UAObject>
+  <UAObject BrowseName="2:Obj1ns2" NodeId="ns=2;i=1" ParentNodeId="i=85">
+    <DisplayName>Obj1ns2</DisplayName>
+    <References>
+      <Reference IsForward="false" ReferenceType="Organizes">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=2;i=3</Reference>
+    </References>
+  </UAObject>
+  <UAObject BrowseName="3:Obj1ns3" NodeId="ns=3;i=1" ParentNodeId="i=85">
+    <DisplayName>Obj1ns3</DisplayName>
+    <References>
+      <Reference IsForward="false" ReferenceType="Organizes">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+      <Reference ReferenceType="HasComponent">ns=3;i=2</Reference>
+    </References>
+  </UAObject>
+  <UAVariable BrowseName="1:var1obj11" DataType="Float" NodeId="ns=1;i=2003" ParentNodeId="ns=1;i=2001">
+    <DisplayName>var1obj11</DisplayName>
+    <Description>var1obj11</Description>
+    <References>
+      <Reference IsForward="false" ReferenceType="HasComponent">ns=1;i=2001</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable BrowseName="1:var2obj11" DataType="Float" NodeId="ns=1;i=2004" ParentNodeId="ns=1;i=2001">
+    <DisplayName>var2obj11</DisplayName>
+    <Description>var2obj11</Description>
+    <References>
+      <Reference IsForward="false" ReferenceType="HasComponent">ns=1;i=2001</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable BrowseName="1:var1obj12" DataType="Float" NodeId="ns=1;i=2005" ParentNodeId="ns=1;i=2002">
+    <DisplayName>var1obj12</DisplayName>
+    <Description>var1obj12</Description>
+    <References>
+      <Reference IsForward="false" ReferenceType="HasComponent">ns=1;i=2002</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable BrowseName="2:var222" DataType="Float" NodeId="ns=2;i=3" ParentNodeId="ns=2;i=1">
+    <DisplayName>var222</DisplayName>
+    <Description>var222</Description>
+    <References>
+      <Reference IsForward="false" ReferenceType="HasComponent">ns=2;i=1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+  <UAVariable BrowseName="3:var233" DataType="Float" NodeId="ns=3;i=2" ParentNodeId="ns=3;i=1">
+    <DisplayName>var233</DisplayName>
+    <Description>var233</Description>
+    <References>
+      <Reference IsForward="false" ReferenceType="HasComponent">ns=3;i=1</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+    </References>
+    <Value>
+      <uax:Float>0.0</uax:Float>
+    </Value>
+  </UAVariable>
+</UANodeSet>
