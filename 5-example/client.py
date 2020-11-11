@@ -43,7 +43,7 @@ def start_client(file):
                         for dicVar in variables:
                             
                             #Escribir el valor de una de las variables
-                            if dicVar["name"] == "timeStamp" and dicVar["parentName"] == "Other":
+                            if dicVar["name"] == "timeStamp" and dicVar["parentName"] == "Other" and dicVar["nsName"]== "OPCUA_TEST":
                                 node = client.get_node("ns=" + str(dicVar["ns"]) + "; i=" + str(dicVar["id"]))
                                 TIME = datetime.datetime.now()
                                 node.set_value(TIME)

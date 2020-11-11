@@ -45,8 +45,10 @@ def read_file(server,file):
     
     for dicO in objects:
         dicO["ns"] = nameSpaces[dicO["i"]]["index"]
+        dicO["nsName"] = nameSpaces[dicO["i"]]["name"]
         for dicVar in variables:
             dicVar["ns"] = nameSpaces[dicVar["i"]]["index"]
+            dicVar["nsName"] = nameSpaces[dicVar["i"]]["name"]
             if dicVar["parentid"] == dicO["id"]:
                 dicVar["parentName"] = dicO["name"]
 

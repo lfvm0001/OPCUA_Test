@@ -55,13 +55,13 @@ def start_server(file):
                         for dicVar in variables:
                             
                             #Escribir el valor de una de las variables: temp 
-                            if dicVar["name"] == "temp" and dicVar["parentName"] == "Raspberry":
+                            if dicVar["name"] == "temp" and dicVar["parentName"] == "Raspberry" and dicVar["nsName"]== "OPCUA_TEST":
                                 node = server.get_node("ns=" + str(dicVar["ns"]) + "; i=" + str(dicVar["id"]))
                                 value = 100*adc.read_adc(0, gain=GAIN)*6.144/32765
                                 node.set_value(value)
                                 
                             #Escribir el valor de una de las variables: led 
-                            if dicVar["name"] == "led" and dicVar["parentName"] == "Raspberry":
+                            if dicVar["name"] == "led" and dicVar["parentName"] == "Raspberry" and dicVar["nsName"]== "OPCUA_TEST":
                                 node = server.get_node("ns=" + str(dicVar["ns"]) + "; i=" + str(dicVar["id"]))
                                 if (GPIO.input(10) == True):
                                     value = True
@@ -76,7 +76,7 @@ def start_server(file):
                                 print("   " + dicVar["name"] + ": " + str(value))
                              
                             #Observar el valor de la variable led y encender y apagar el led acorde
-                            if dicVar["name"] == "led" and dicVar["parentName"] == "Raspberry":
+                            if dicVar["name"] == "led" and dicVar["parentName"] == "Raspberry" and dicVar["nsName"]== "OPCUA_TEST":
                                 node = server.get_node("ns=" + str(dicVar["ns"]) + "; i=" + str(dicVar["id"]))
                                 value = node.get_value()
                                 if value == True:
