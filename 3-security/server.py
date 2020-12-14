@@ -5,14 +5,14 @@ def start_server():
 
     server = Server()
 
-    url = "opc.tcp://172.16.102.43:4840" #IP:port 
+    url = "opc.tcp://172.16.1.166:4840" #IP:port 
    #url = "opc.tcp://192.168.0.100:4840" #IP:port
     server.set_endpoint(url)
 
     name = "OPCUA_SERVER_TEST"
     addspace = server.register_namespace(name)
     
-    server.load_certificate("certificate.pem")
+    server.load_certificate("certificate.der")
     server.load_private_key("key.pem")
     server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt])
     

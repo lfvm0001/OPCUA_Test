@@ -17,7 +17,7 @@ def start_server(file):
     
     #IP:port 
     #url = "opc.tcp://192.168.0.100:4840" 
-    url = "opc.tcp://172.16.102.43:4840"
+    url = "opc.tcp://172.16.1.166:4840"
 
     #Configurar servidor en url definido e importar archivo de modelo de informacion 
     server.set_endpoint(url)
@@ -25,7 +25,7 @@ def start_server(file):
  
     #Si se desea seguridad a la hora de conectarse, cargar el certificado y key 
     #Deben estar en el mismo directorio y el cliente tambien debe tenerlos
-    server.load_certificate("certificate.pem")
+    server.load_certificate("certificate.der")
     server.load_private_key("key.pem")
     server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt]) 
     
