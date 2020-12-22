@@ -3,8 +3,7 @@ import time
 
 def start_client():
     
-   #url = "opc.tcp://172.16.102.43:4840" #IP:port 
-    url = "opc.tcp://192.168.0.100:4840" #IP:port
+    url = "opc.tcp://172.20.10.2:4840"
     client = Client(url)
     
     try:

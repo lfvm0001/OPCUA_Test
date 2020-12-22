@@ -6,8 +6,7 @@ def start_server():
 
     server = Server()
 
-    url = "opc.tcp://172.16.1.166:4840" #IP:port 
-    #url = "opc.tcp://192.168.1.35:4840" #IP:port
+    url = "opc.tcp://172.20.10.2:4840" 
     server.set_endpoint(url)
 
     name = "OPCUA_SERVER_TEST"

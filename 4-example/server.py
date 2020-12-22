@@ -16,8 +16,7 @@ def start_server(file):
     server = Server()
     
     #IP:port 
-    #url = "opc.tcp://192.168.0.100:4840" 
-    url = "opc.tcp://172.16.1.166:4840"
+    url = "opc.tcp://10.82.132.99:4840"
 
     #Configurar servidor en url definido e importar archivo de modelo de informacion 
     server.set_endpoint(url)

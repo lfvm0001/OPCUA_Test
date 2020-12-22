@@ -3,30 +3,14 @@ import time
 
 def start_client():
     
-    url = "opc.tcp://172.16.1.166:4840" #IP:port 
+    url = "opc.tcp://10.82.132.99:4840"
     client = Client(url)
+    client.set_security_string("Basic256Sha256,SignAndEncrypt,certificate.der,key.pem")
     
     try:
         client.connect()
         print("Client connected")
         
-        temp = client.get_node("ns=2; i=2")
-        timeS = client.get_node("ns=2; i=3")
-        
-        cont = 0
-        while cont<20:
-            Temperature = temp.get_value()
-            print(Temperature)
-    
-            timeStamp = timeS.get_value()
-            print(timeStamp)
-            
-            time.sleep(2)
-            cont += 1
-            
-        print("\nDisconecting")
-        client.disconnect()
-            
     except KeyboardInterrupt:
         print("\nDisconnecting")
         client.disconnect()

@@ -6,7 +6,7 @@ def start_server():
 
     server = Server()
 
-    url = "opc.tcp://172.16.1.166:4840"
+    url = "opc.tcp://10.82.132.99:4840"
     server.set_endpoint(url)
 
     name = "OPCUA_SERVER_TEST"
@@ -20,6 +20,10 @@ def start_server():
     
     temp.set_writable()
     timeS.set_writable()
+    
+    server.load_certificate("certificate.der")
+    server.load_private_key("key.pem")
+    server.set_security_policy([ua.SecurityPolicyType.Basic256Sha256_SignAndEncrypt]) 
 
     server.start()
     print("Server started at {}".format(url))

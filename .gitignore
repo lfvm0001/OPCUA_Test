@@ -1,5 +1,7 @@
 3-security/*.pem
+3-security/*.der
 4-example/*.pem
+4-example/*.der
 4-example/__py*
 4-example/readXML.pyc
 5-PLC/*.pem

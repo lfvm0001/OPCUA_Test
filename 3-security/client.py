@@ -3,8 +3,7 @@ import time
 
 def start_client():
     
-    url = "opc.tcp://172.16.1.166:4840" #IP:port 
-   #url = "opc.tcp://192.168.0.100:4840" #IP:port
+    url = "opc.tcp://10.82.132.99:4840" 
     client = Client(url)
     
     client.set_security_string("Basic256Sha256,SignAndEncrypt,certificate.der,key.pem")
