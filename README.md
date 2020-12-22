@@ -5,7 +5,7 @@ To generate data model, use opcua-modeler: https://github.com/FreeOpcUa/opcua-mo
 
 To generate certificate and key (Taken from https://github.com/AndreasHeine/SecurePythonOpcUaServer): \
 Create certificate (certificate.der) and key (key.pem) in server and client:\
-   -change ssl.conf (subjectAltname, country, organizationName, ...)\
-   -openssl genrsa -out key.pem 2048 \
-   -openssl req -x509 -days 36500 -new -out certificate.pem -key key.pem -config ssl.conf\
-   -openssl x509 -outform der -in certificate.pem -out certificate.der\
+   &nbsp; &nbsp; change ssl.conf (subjectAltname, country, organizationName, ...)\
+   &nbsp; &nbsp; openssl genrsa -out key.pem 2048 \
+   &nbsp; &nbsp; openssl req -x509 -days 36500 -new -out certificate.pem -key key.pem -config ssl.conf\
+   &nbsp; &nbsp; openssl x509 -outform der -in certificate.pem -out certificate.der\
